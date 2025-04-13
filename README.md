@@ -44,42 +44,105 @@ angular-cross-app-jwt-auth/
 
 
 
+```markdown
+# 🚀 Angular Cross-App JWT Authentication
 
+This project demonstrates cross-application authentication using JWTs in Angular. It features two separate apps:
 
+- **Project 1**: Login + Dashboard  
+- **Project 2**: Dashboard Only (accessed with a JWT token)
 
+---
 
+## 🛠️ Getting Started
 
-🚀 Getting Started
-1️⃣ Clone the repo
+### 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/your-username/angular-cross-app-jwt-auth.git
 cd angular-cross-app-jwt-auth
-2️⃣ Install dependencies
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
 cd project-1
 npm install
 
 cd ../project-2
 npm install
-3️⃣ Run the apps
-Start Project 1 (Login + Dashboard):
+```
+
+### 3️⃣ Run the Applications
+
+**Start Project 1 (Login + Dashboard):**
+
+```bash
 cd project-1
 ng serve --port 4200
-Start Project 2 (Dashboard Only):
+```
+
+**Start Project 2 (Dashboard Only):**
+
+```bash
 cd ../project-2
 ng serve --port 4300
-🔐 How It Works
-🔸 JWT Encoding (in Project 1)
+```
+
+---
+
+## 🔐 How It Works
+
+### 🔸 JWT Encoding (in Project 1)
+
+```ts
 const jwt = await encodeJWT(header, payload, secret);
-// Sent via query param: http://localhost:4300?token=...
-🔸 Receiving Token (in Project 2)
-// Extract token from query param and store in cookie
+```
+
+- The token is sent via a query parameter:
+  ```
+  http://localhost:4300?token=...
+  ```
+
+### 🔸 Receiving Token (in Project 2)
+
+- Extract token from query param and store in cookie:
+
+```js
 document.cookie = `token=...; path=/; secure; samesite=strict`;
-🔸 AuthGuard & Interceptor (both apps)
-AuthGuard checks for token presence (in localStorage or cookies)
+```
 
-Interceptor attaches token to outgoing requests
+### 🔸 AuthGuard & Interceptor (Both Projects)
 
-🔘 Project 2: Buttons
-🔙 Return → Removes token cookie, redirects to Project 1 dashboard
+- **AuthGuard**: Checks for token presence (in `localStorage` or cookies)
+- **Interceptor**: Attaches token to outgoing HTTP requests
 
-🔐 Logout → Clears cookie and sends user to Project 1 login page
+---
 
+## 🔘 Project 2: Buttons
+
+- **🔙 Return** → Removes token cookie, redirects to Project 1 dashboard  
+- **🔐 Logout** → Clears cookie and sends user to Project 1 login page
+
+---
+
+## 📂 Folder Structure
+
+```
+angular-cross-app-jwt-auth/
+├── project-1/     # Login + Dashboard
+└── project-2/     # Token-based Dashboard
+```
+
+---
+
+## 📌 Notes
+
+- Ensure both apps run on different ports (4200 and 4300)
+- Cookies are stored with `secure` and `samesite=strict` flags for enhanced security
+- Useful for micro-frontend or multi-portal architecture with centralized authentication
+
+
+---
+
+Let me know if you want to update the GitHub URL, customize styling, or add images/screenshots!
